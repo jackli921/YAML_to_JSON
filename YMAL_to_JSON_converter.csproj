@@ -13,6 +13,7 @@
         <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
         <FileAlignment>512</FileAlignment>
         <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+        <LangVersion>8</LangVersion>
     </PropertyGroup>
     <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
         <PlatformTarget>AnyCPU</PlatformTarget>
@@ -75,10 +76,12 @@
         </Reference>
     </ItemGroup>
     <ItemGroup>
+        <Compile Include="Enums.cs" />
         <Compile Include="MenuChoice.cs" />
         <Compile Include="Program.cs"/>
         <Compile Include="Properties\AssemblyInfo.cs"/>
         <Compile Include="SerializeAndDeserialize.cs" />
+        <Compile Include="Utility.cs" />
     </ItemGroup>
     <ItemGroup>
       <None Include="App.config" />

@@ -7,7 +7,6 @@ namespace YMAL_to_JSON_converter
 {
     internal class Program
     {
-        static internal bool isValidFilePath { get; set; } = false;
         static internal string filePath { get; set; }
 
         public static void Main(string[] args)
@@ -42,13 +41,6 @@ namespace YMAL_to_JSON_converter
                     Console.WriteLine("Invalid choice. Please try again.");
                 }
             }
-            
-            Console.WriteLine($"filepath you entered is {filePath}");
-            string fileContent = File.ReadAllText(filePath);
-            string json = SerializeAndDeserialize.SerializeToJson(fileContent);
-            Console.WriteLine(json);
-            
-            var pause = Console.ReadLine();
         }
 
         public static void HandleConversion(int choice)
@@ -66,13 +58,13 @@ namespace YMAL_to_JSON_converter
                 {
                     string fileName = Path.GetFileNameWithoutExtension(filePath);
                     string directoryPath = Path.GetDirectoryName(filePath);
-                    string outputFilepath = Path.Combine(directoryPath, $"{fileName}.json");
                     string inputData = File.ReadAllText(filePath);
                     switch (choice)
                     {
                         case 1:
-                            string JsonString = SerializeAndDeserialize.SerializeToJson(inputData);
-                            File.WriteAllText(outputFilepath, JsonString);
+                            string jsonString = SerializeAndDeserialize.SerializeToJsonWithIndent(inputData);
+                            string outputFilePath = Utility.GetOutputFilePath(fileName,directoryPath, ConversionTarget.ToJson);
+                            File.WriteAllText(outputFilePath, jsonString);
                             break;
                         default:
                             Console.WriteLine("Invalid choice. Please try again");

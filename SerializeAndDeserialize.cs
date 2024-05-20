@@ -21,10 +21,10 @@ namespace YMAL_to_JSON_converter
                 .Build();
             return deserializer.Deserialize<T>(yaml);
         }
-        public static string SerializeToJson(string yaml)
+        public static string SerializeToJsonWithIndent(string inputData)
         {
             var deserializer = new DeserializerBuilder().Build();
-            var yamlObject = deserializer.Deserialize(yaml);
+            var yamlObject = deserializer.Deserialize(inputData);
 
             var serializer = new JsonSerializer
             {
@@ -34,9 +34,20 @@ namespace YMAL_to_JSON_converter
             var writer = new StringWriter(sb);
             serializer.Serialize(writer, yamlObject);
             return sb.ToString();    
+            
             // var serializer = new SerializerBuilder()
             //     .JsonCompatible().Build();
             // return serializer.Serialize(yamlObject);
+        }
+
+        public static string SerializeToJsonWithoutIndent(string inputData)
+        {
+            var deserializer = new DeserializerBuilder().Build();
+            var yamlObject = deserializer.Deserialize(inputData);
+
+            var serializer = new SerializerBuilder()
+                .JsonCompatible().Build();
+            return serializer.Serialize(yamlObject);
         }
     }
 
